@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.validation-deps/
+.sw-learner-state.json
+.sw-feedback-payload.json
+.sw-feedback-pref
+*.log

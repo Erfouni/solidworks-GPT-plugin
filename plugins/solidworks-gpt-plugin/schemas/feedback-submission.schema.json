@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Erfouni/solidworks-GPT-plugin/schemas/feedback-submission.schema.json",
+  "title": "SolidWorks FeedbackSubmission",
+  "type": "object",
+  "required": [
+    "issues",
+    "sessionId"
+  ],
+  "properties": {
+    "issues": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "partId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "images": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "filename",
+          "contentType",
+          "dataBase64"
+        ],
+        "properties": {
+          "filename": {
+            "type": "string",
+            "minLength": 1
+          },
+          "contentType": {
+            "enum": [
+              "image/png",
+              "image/jpeg",
+              "image/bmp",
+              "image/tiff",
+              "image/gif"
+            ]
+          },
+          "dataBase64": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "instructions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "content"
+        ],
+        "properties": {
+          "content": {
+            "type": "string",
+            "minLength": 1
+          },
+          "partId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "macros": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "language",
+          "code"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string"
+          },
+          "language": {
+            "enum": [
+              "python",
+              "vba",
+              "swapi"
+            ]
+          },
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "swFeaturesUsed": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "parameters": {
+            "type": "object"
+          },
+          "isTemplate": {
+            "type": "boolean"
+          },
+          "version": {
+            "type": "string"
+          },
+          "partId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "knownErrors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "title",
+          "description"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "errorCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "swFeature": {
+            "type": "string"
+          },
+          "resolution": {
+            "type": "string"
+          },
+          "isResolved": {
+            "type": "boolean"
+          },
+          "severity": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "lessons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "category",
+          "title",
+          "whatHappened",
+          "rootCause",
+          "prevention",
+          "severity"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "whatHappened": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rootCause": {
+            "type": "string",
+            "minLength": 1
+          },
+          "prevention": {
+            "type": "string",
+            "minLength": 1
+          },
+          "severity": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "partId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "refCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createsRule": {
+            "type": "boolean"
+          },
+          "ruleCheckType": {
+            "type": "string"
+          },
+          "ruleParameters": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

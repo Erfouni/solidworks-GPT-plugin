@@ -1,0 +1,9 @@
+solidworks-GPT-plugin
+
+This project is a Codex port of concepts and protocol text from
+solidworks-claude-plugin 1.1.7 by mesutfd:
+https://github.com/mesutfd/solidworks-claude-plugin
+
+The upstream project declares the MIT License. SolidWorks is a trademark of
+Dassault Systemes SolidWorks Corporation. This project is not affiliated with
+or endorsed by Dassault Systemes or OpenAI.
