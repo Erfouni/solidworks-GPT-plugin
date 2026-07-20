@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">SolidWorks GPT Plugin workflow preview</title>
+  <desc id="desc">A technical walkthrough from engineering requirements through knowledge lookup, planning, SolidWorks modeling, deterministic validation, and evidence-backed delivery.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10233f"/>
+      <stop offset="0.55" stop-color="#0b1729"/>
+      <stop offset="1" stop-color="#07111f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#33e1c6"/>
+      <stop offset="1" stop-color="#48a9ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="9" stdDeviation="9" flood-color="#020812" flood-opacity="0.55"/>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0 0l8 4-8 4z" fill="#33e1c6"/>
+    </marker>
+    <marker id="repair-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0 0l8 4-8 4z" fill="#ff8a65"/>
+    </marker>
+    <style>
+      .mono { font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace; }
+      .ui { font-family: Inter, "Segoe UI", Arial, sans-serif; }
+      .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 1.7px; fill: #7f95aa; }
+      .step-title { font-size: 17px; font-weight: 800; fill: #f2f7fa; }
+      .step-copy { font-size: 13px; fill: #aebdca; }
+      .number { font-size: 13px; font-weight: 800; fill: #07111f; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="560" rx="28" fill="url(#background)"/>
+  <g stroke="#33e1c6" stroke-opacity="0.055" stroke-width="1">
+    <path d="M0 80h1200M0 160h1200M0 240h1200M0 320h1200M0 400h1200M0 480h1200"/>
+    <path d="M80 0v560M160 0v560M240 0v560M320 0v560M400 0v560M480 0v560M560 0v560M640 0v560M720 0v560M800 0v560M880 0v560M960 0v560M1040 0v560M1120 0v560"/>
+  </g>
+
+  <rect x="40" y="34" width="9" height="9" rx="2" fill="#ff5f56"/>
+  <rect x="57" y="34" width="9" height="9" rx="2" fill="#ffbd2e"/>
+  <rect x="74" y="34" width="9" height="9" rx="2" fill="#27c93f"/>
+  <text x="101" y="44" class="mono" font-size="14" fill="#8fa4b8">$ codex run solidworks-design --evidence</text>
+  <rect x="937" y="26" width="223" height="28" rx="14" fill="#33e1c6" fill-opacity="0.12" stroke="#33e1c6" stroke-opacity="0.42"/>
+  <text x="1048.5" y="44" text-anchor="middle" class="mono" font-size="12" font-weight="800" fill="#65f3dc">NO VIBES-ONLY CAD</text>
+
+  <text x="40" y="96" class="ui" font-size="30" font-weight="800" fill="#f2f7fa">Knowledge-backed engineering, end to end.</text>
+  <text x="40" y="126" class="ui" font-size="16" fill="#9fb0bf">Requirements become geometry only after standards, constraints, and acceptance criteria are explicit.</text>
+  <rect x="40" y="143" width="1120" height="3" rx="1.5" fill="url(#accent)" opacity="0.82"/>
+
+  <g filter="url(#shadow)">
+    <g transform="translate(40 176)">
+      <rect width="160" height="210" rx="16" fill="#10233f" stroke="#26445f"/>
+      <circle cx="26" cy="29" r="15" fill="#33e1c6"/>
+      <text x="26" y="34" text-anchor="middle" class="mono number">01</text>
+      <text x="18" y="73" class="mono eyebrow">INPUT</text>
+      <text x="18" y="101" class="ui step-title">Requirements</text>
+      <text x="18" y="133" class="mono step-copy">units · dimensions</text>
+      <text x="18" y="157" class="mono step-copy">material · tolerance</text>
+      <text x="18" y="181" class="mono step-copy">required outputs</text>
+    </g>
+
+    <g transform="translate(232 176)">
+      <rect width="160" height="210" rx="16" fill="#10233f" stroke="#26445f"/>
+      <circle cx="26" cy="29" r="15" fill="#33e1c6"/>
+      <text x="26" y="34" text-anchor="middle" class="mono number">02</text>
+      <text x="18" y="73" class="mono eyebrow">RETRIEVE</text>
+      <text x="18" y="101" class="ui step-title">Knowledge</text>
+      <text x="18" y="133" class="mono step-copy">standards · fits</text>
+      <text x="18" y="157" class="mono step-copy">proven patterns</text>
+      <text x="18" y="181" class="mono step-copy">known API errors</text>
+    </g>
+
+    <g transform="translate(424 176)">
+      <rect width="160" height="210" rx="16" fill="#10233f" stroke="#26445f"/>
+      <circle cx="26" cy="29" r="15" fill="#33e1c6"/>
+      <text x="26" y="34" text-anchor="middle" class="mono number">03</text>
+      <text x="18" y="73" class="mono eyebrow">REASON</text>
+      <text x="18" y="101" class="ui step-title">Plan</text>
+      <text x="18" y="133" class="mono step-copy">datums · sketches</text>
+      <text x="18" y="157" class="mono step-copy">feature sequence</text>
+      <text x="18" y="181" class="mono step-copy">acceptance gates</text>
+    </g>
+
+    <g transform="translate(616 176)">
+      <rect width="160" height="210" rx="16" fill="#10233f" stroke="#26445f"/>
+      <circle cx="26" cy="29" r="15" fill="#33e1c6"/>
+      <text x="26" y="34" text-anchor="middle" class="mono number">04</text>
+      <text x="18" y="73" class="mono eyebrow">TOOL CALL</text>
+      <text x="18" y="101" class="ui step-title">Model</text>
+      <text x="18" y="133" class="mono step-copy">SolidWorks actions</text>
+      <text x="18" y="157" class="mono step-copy">feature tree</text>
+      <text x="18" y="181" class="mono step-copy">save each document</text>
+    </g>
+
+    <g transform="translate(808 176)">
+      <rect width="160" height="210" rx="16" fill="#10233f" stroke="#33e1c6" stroke-opacity="0.62"/>
+      <circle cx="26" cy="29" r="15" fill="#33e1c6"/>
+      <text x="26" y="34" text-anchor="middle" class="mono number">05</text>
+      <text x="18" y="73" class="mono eyebrow">GATE</text>
+      <text x="18" y="101" class="ui step-title">Validate</text>
+      <text x="18" y="133" class="mono step-copy">rebuild · errors</text>
+      <text x="18" y="157" class="mono step-copy">mass · bounding box</text>
+      <text x="18" y="181" class="mono step-copy">validate_document</text>
+    </g>
+
+    <g transform="translate(1000 176)">
+      <rect width="160" height="210" rx="16" fill="#10233f" stroke="#26445f"/>
+      <circle cx="26" cy="29" r="15" fill="#33e1c6"/>
+      <text x="26" y="34" text-anchor="middle" class="mono number">06</text>
+      <text x="18" y="73" class="mono eyebrow">OUTPUT</text>
+      <text x="18" y="101" class="ui step-title">Deliver</text>
+      <text x="18" y="133" class="mono step-copy">SLDPRT · STEP</text>
+      <text x="18" y="157" class="mono step-copy">measured evidence</text>
+      <text x="18" y="181" class="mono step-copy">consent-gated learn</text>
+    </g>
+  </g>
+
+  <g fill="none" stroke="#33e1c6" stroke-width="2" marker-end="url(#arrow)">
+    <path d="M202 281h25"/>
+    <path d="M394 281h25"/>
+    <path d="M586 281h25"/>
+    <path d="M778 281h25"/>
+    <path d="M970 281h25"/>
+  </g>
+
+  <path d="M888 392v37c0 18-14 32-32 32H696c-18 0-32-14-32-32v-31" fill="none" stroke="#ff8a65" stroke-width="2" stroke-dasharray="7 7" marker-end="url(#repair-arrow)"/>
+  <rect x="722" y="442" width="115" height="25" rx="12.5" fill="#ff8a65" fill-opacity="0.13" stroke="#ff8a65" stroke-opacity="0.55"/>
+  <text x="779.5" y="459" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#ffab91">FAIL → REPAIR</text>
+
+  <rect x="40" y="492" width="1120" height="40" rx="12" fill="#06101c" stroke="#1d354b"/>
+  <circle cx="65" cy="512" r="7" fill="#27c93f"/>
+  <text x="84" y="517" class="mono" font-size="13" fill="#c9d8e4">PASS = validated model + measured evidence</text>
+  <text x="1140" y="517" text-anchor="end" class="mono" font-size="12" fill="#7f95aa">feedback stays local unless consent == YES</text>
+</svg>
