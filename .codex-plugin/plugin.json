@@ -16,7 +16,7 @@
     "engineering",
     "knowledge-base"
   ],
-  "skills": "./skills/",
+  "skills": "./plugins/solidworks-gpt-plugin/skills/",
   "interface": {
     "displayName": "SolidWorks GPT Plugin",
     "shortDescription": "Knowledge-backed SolidWorks design and validation",
