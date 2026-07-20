@@ -35,3 +35,6 @@ jobs:
 
       - name: Run structural and runtime checks
         run: python plugins/solidworks-gpt-plugin/scripts/run_checks.py
+
+      - name: Validate versioned installed-bundle layout
+        run: python scripts/validate_installed_bundle.py
