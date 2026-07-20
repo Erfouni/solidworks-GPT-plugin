@@ -17,6 +17,55 @@ It adds five coordinated skills:
 - `sw-learner` builds a complete, corrected feedback payload from the current SolidWorks session.
 - `sw-session-reporter` asks for consent and submits feedback to the knowledge base.
 
+## What the workflow guarantees
+
+This plugin is designed for engineering work where a plausible answer is not
+enough. It makes requirements, knowledge lookup, modeling, and validation
+explicit parts of one workflow:
+
+```mermaid
+flowchart LR
+    A[Design request] --> B[Requirements and pre-start checks]
+    B --> C[Standards and knowledge lookup]
+    C --> D[Feature and datum plan]
+    D --> E[SolidWorks modeling]
+    E --> F{validate_document passes?}
+    F -- No --> G[Inspect and repair]
+    G --> E
+    F -- Yes --> H[Save, export, and report evidence]
+    H --> I[Build session lessons]
+    I --> J{User consent?}
+    J -- Yes --> K[Submit validated feedback]
+    J -- No --> L[Keep the session local]
+```
+
+| Boundary | Behavior |
+|---|---|
+| Engineering inputs | Units, dimensions, material, tolerances, and outputs are confirmed before geometry changes. |
+| Knowledge | Standards, proven build instructions, macros, errors, and lessons are retrieved before modeling. |
+| CAD validation | Rebuild state, feature tree, mass, bounding box, and `validate_document` determine pass or fail. |
+| Privacy | Feedback is local by default and is submitted only with explicit or previously saved consent. |
+
+## 60-second tour
+
+After installing the plugin, start a new Codex task with a concrete engineering
+request. For example:
+
+```text
+Design a metric stepped shaft in SolidWorks.
+Units: mm
+Material: AISI 1045
+Overall length: 160
+Bearing seats: 25 h6 x 30 long at both ends
+Center section: 35 mm diameter
+Output: saved part, STEP export, mass, bounding box, validation report
+```
+
+The workflow will stop for any geometry-changing requirement that is still
+ambiguous, retrieve applicable standards and known patterns, plan the model,
+build each document, and report measured validation evidence. A knowledge-base
+outage is recorded but does not block local CAD work.
+
 The default knowledge base is `https://sw-plugin.ideep.org`. Override it with
 the `SW_KB_HOST` environment variable. Read-only runtime endpoints are public;
 session feedback is sent only after the user chooses **Yes, send now** or has
@@ -46,6 +95,10 @@ the absolute path to this repository.
 
 Knowledge-base outages never block CAD work. The skills record the outage and
 continue with the available SolidWorks tooling and engineering context.
+
+For release notes and project questions, see the
+[v1.0.0 release](https://github.com/Erfouni/solidworks-GPT-plugin/releases/tag/v1.0.0)
+and [GitHub Discussions](https://github.com/Erfouni/solidworks-GPT-plugin/discussions).
 
 ## Privacy and local state
 
