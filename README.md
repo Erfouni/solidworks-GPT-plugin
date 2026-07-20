@@ -97,8 +97,9 @@ Knowledge-base outages never block CAD work. The skills record the outage and
 continue with the available SolidWorks tooling and engineering context.
 
 For release notes and project questions, see the
-[v1.0.0 release](https://github.com/Erfouni/solidworks-GPT-plugin/releases/tag/v1.0.0)
-and [GitHub Discussions](https://github.com/Erfouni/solidworks-GPT-plugin/discussions).
+[latest release](https://github.com/Erfouni/solidworks-GPT-plugin/releases/latest),
+the [changelog](CHANGELOG.md), and
+[GitHub Discussions](https://github.com/Erfouni/solidworks-GPT-plugin/discussions).
 
 ## Privacy and local state
 
