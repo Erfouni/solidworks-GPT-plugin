@@ -11,6 +11,10 @@ SCRIPT_DIR = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from submit_feedback import parse_response  # noqa: E402
+from run_checks import (  # noqa: E402
+    find_source_repository_root,
+    plugin_directory_matches_manifest,
+)
 from sw_session import (  # noqa: E402
     load_state,
     mark_feedback_submitted,
@@ -94,6 +98,46 @@ class FeedbackValidationTests(unittest.TestCase):
         body, status = parse_response(json.dumps({"id": "abc"}) + "\n201")
         self.assertEqual(json.loads(body)["id"], "abc")
         self.assertEqual(status, "201")
+
+
+class InstalledBundleValidationTests(unittest.TestCase):
+    def test_source_checkout_and_installed_bundle_layouts_are_distinguished(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source_plugin = root / "source" / "plugins" / "solidworks-gpt-plugin"
+            (source_plugin / ".codex-plugin").mkdir(parents=True)
+            (root / "source" / ".codex-plugin").mkdir(parents=True)
+            (root / "source" / ".agents" / "plugins").mkdir(parents=True)
+            (root / "source" / ".codex-plugin" / "plugin.json").write_text("{}")
+            (root / "source" / ".agents" / "plugins" / "marketplace.json").write_text("{}")
+
+            installed_plugin = root / "cache" / "solidworks-gpt-plugin" / "1.0.1"
+            (installed_plugin / ".codex-plugin").mkdir(parents=True)
+            local_plugin = root / "local-marketplace" / "solidworks-gpt-plugin"
+            (local_plugin / ".codex-plugin").mkdir(parents=True)
+
+            self.assertEqual(find_source_repository_root(source_plugin), root / "source")
+            self.assertIsNone(find_source_repository_root(installed_plugin))
+            self.assertTrue(
+                plugin_directory_matches_manifest(
+                    source_plugin, root / "source", "solidworks-gpt-plugin", "1.0.1"
+                )
+            )
+            self.assertTrue(
+                plugin_directory_matches_manifest(
+                    installed_plugin, None, "solidworks-gpt-plugin", "1.0.1"
+                )
+            )
+            self.assertTrue(
+                plugin_directory_matches_manifest(
+                    local_plugin, None, "solidworks-gpt-plugin", "1.0.1"
+                )
+            )
+            self.assertFalse(
+                plugin_directory_matches_manifest(
+                    installed_plugin, None, "solidworks-gpt-plugin", "2.0.0"
+                )
+            )
 
 
 if __name__ == "__main__":

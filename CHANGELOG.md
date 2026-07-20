@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions use
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- Made the bundled validator work in Codex's versioned plugin-cache layout as
+  well as in a source checkout.
+- Added a Python 3.9/3.13 CI gate that installs the bundle into a temporary
+  versioned layout and runs its complete structural and runtime checks there.
+
 ## [1.0.1] - 2026-07-20
 
 ### Added
@@ -34,3 +43,4 @@ All notable changes to this project are documented here. The format follows
 
 [1.0.1]: https://github.com/Erfouni/solidworks-GPT-plugin/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/Erfouni/solidworks-GPT-plugin/releases/tag/v1.0.0
+[Unreleased]: https://github.com/Erfouni/solidworks-GPT-plugin/compare/v1.0.1...HEAD
