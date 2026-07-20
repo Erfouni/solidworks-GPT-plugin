@@ -1,5 +1,10 @@
 # solidworks-GPT-plugin
 
+[![Validate plugin](https://github.com/Erfouni/solidworks-GPT-plugin/actions/workflows/validate.yml/badge.svg)](https://github.com/Erfouni/solidworks-GPT-plugin/actions/workflows/validate.yml)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Model Context Protocol](https://img.shields.io/badge/MCP-enabled-7C3AED)](https://modelcontextprotocol.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 An installable Codex plugin that ports the knowledge workflow of
 [`solidworks-claude-plugin`](https://github.com/mesutfd/solidworks-claude-plugin)
 to OpenAI Codex.
