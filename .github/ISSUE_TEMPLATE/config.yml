@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: MCP specification questions
+    url: https://github.com/modelcontextprotocol/modelcontextprotocol/discussions
+    about: Ask protocol-level MCP questions in the upstream MCP community.

@@ -1,0 +1,62 @@
+name: Bug report
+description: Report a reproducible problem in the plugin or its runtime helpers.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping us make engineering automation more reliable.
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version or commit
+      placeholder: v1.0.0 or a commit SHA
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - SolidWorks design workflow
+        - Knowledge-base lookup
+        - Session learner or feedback
+        - Plugin installation or manifest
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Include the smallest safe example that reproduces the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include Windows, SolidWorks, Python, and Codex versions when relevant.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Redacted logs
+      description: Never include secrets, proprietary CAD data, or private KB content.
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed secrets, private model data, and identifying machine information.
+          required: true
+        - label: I ran `python plugins/solidworks-gpt-plugin/scripts/run_checks.py` when possible.
+          required: false

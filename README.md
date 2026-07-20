@@ -68,6 +68,12 @@ python plugins/solidworks-gpt-plugin/scripts/run_checks.py
 The repository also includes the original porting specification and the KB
 admin OpenAPI reference under `plugins/solidworks-gpt-plugin/docs/`.
 
+## Contributing
+
+Bug reports, documentation improvements, and focused pull requests are
+welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), use the structured issue
+templates, and run the repository checks before opening a pull request.
+
 ## License
 
 MIT. See [LICENSE](LICENSE) and [NOTICE](NOTICE) for upstream attribution.
