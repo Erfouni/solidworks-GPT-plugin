@@ -6,6 +6,8 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-07-20
+
 ### Fixed
 
 - Made the bundled validator work in Codex's versioned plugin-cache layout as
@@ -41,6 +43,7 @@ All notable changes to this project are documented here. The format follows
 - Deterministic session, feedback validation, and submission utilities.
 - Plugin marketplace metadata, MIT license, and upstream attribution.
 
+[Unreleased]: https://github.com/Erfouni/solidworks-GPT-plugin/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/Erfouni/solidworks-GPT-plugin/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/Erfouni/solidworks-GPT-plugin/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/Erfouni/solidworks-GPT-plugin/releases/tag/v1.0.0
-[Unreleased]: https://github.com/Erfouni/solidworks-GPT-plugin/compare/v1.0.1...HEAD
