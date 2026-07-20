@@ -17,6 +17,11 @@ It adds five coordinated skills:
 - `sw-learner` builds a complete, corrected feedback payload from the current SolidWorks session.
 - `sw-session-reporter` asks for consent and submits feedback to the knowledge base.
 
+<p align="center">
+  <img src="assets/workflow-demo.svg" alt="SolidWorks GPT Plugin conceptual workflow from engineering requirements to validated delivery" width="100%">
+</p>
+<p align="center"><sub>Conceptual workflow preview—not a recorded CAD result. Every reported model still has to pass the measured validation gates shown above.</sub></p>
+
 ## What the workflow guarantees
 
 This plugin is designed for engineering work where a plausible answer is not
