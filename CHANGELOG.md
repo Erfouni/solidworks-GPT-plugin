@@ -6,6 +6,22 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-08-02
+
+### Added
+
+- ENG-001, a non-negotiable engineering requirement, as Phase 0 of
+  `$sw-pre-start` and at the top of `AGENTS.md`: every component must be a real,
+  functional, manufacturable part, modelled separately and justified against
+  standards. No schematic, decorative, placeholder or representational geometry;
+  when reliable data for a component is unavailable, state what is missing
+  rather than inventing values.
+
+  Deliberately duplicated in the plugin rather than left only in the knowledge
+  base. The KB carries it as a convention, but this skill is permitted to
+  continue through a documented KB outage - which would otherwise be exactly the
+  moment the rule disappeared.
+
 ## [1.1.0] - 2026-08-02
 
 ### Added

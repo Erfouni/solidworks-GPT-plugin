@@ -2,6 +2,25 @@
 
 Apply these rules to every SolidWorks request handled with this plugin.
 
+## ENG-001: real parts only
+
+Every component must be a real, functional, manufacturable, technically accurate
+part. Never produce schematic, decorative, conceptual, simplified, placeholder,
+or visually representative geometry - at any size or level of importance.
+
+Research each component against standards and manufacturer data, justify every
+dimension, and model every physical part separately: a 10,000-part assembly is
+10,000 engineered parts, never a simplified block or visual shell standing in
+for a group.
+
+When reliable information for a component is unavailable, **say what is missing
+and stop** - do not fabricate values. A plausible-looking part built from
+invented numbers looks finished and will be trusted, which makes it worse than
+no part at all.
+
+This holds regardless of KB availability. `$sw-pre-start` Phase 0 carries the
+full requirement.
+
 ## Session identity
 
 On the first SolidWorks request in a Codex task, run `scripts/sw_session.py
