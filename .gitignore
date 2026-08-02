@@ -6,3 +6,8 @@ __pycache__/
 .sw-feedback-payload.json
 .sw-feedback-pref
 *.log
+
+# Local working clones. A nested checkout committed as a gitlink produces a
+# submodule reference with no .gitmodules, which clones as an empty directory.
+gpt-plugin/
+sw-plugin/

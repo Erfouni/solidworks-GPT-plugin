@@ -6,6 +6,30 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-08-02
+
+### Added
+
+- Classification hints on feedback submission: `suggestedCategory`,
+  `suggestedPartName` and `suggestedPartNumber`. The agent that built the
+  component records what it believes it made, so a reviewer confirms rather
+  than deduces it from code and renders. All three are optional and advisory -
+  nothing is published on their strength, and the part is still set only by an
+  explicit reviewer action.
+
+### Changed
+
+- `docs/openapi.json` regenerated from the running knowledge base. The previous
+  copy declared `/api/v1` servers while the API mounts at `/api`, documented a
+  bearer token the public API does not require, and omitted the feedback
+  endpoint entirely.
+
+### Fixed
+
+- The submission schema set `additionalProperties: false`, so any field added
+  to the API would have been rejected locally before reaching the server. The
+  three hint fields are now declared.
+
 ## [1.0.2] - 2026-07-20
 
 ### Fixed
