@@ -6,6 +6,14 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Added a deterministic installation doctor with human and JSON output for
+  Python, bundle integrity, feedback-host configuration, `curl`, and local
+  SolidWorks registration.
+- Added strict readiness mode, credential-safe diagnostics, runtime tests, and
+  a static zero-network boundary check.
+
 ## [1.2.0] - 2026-08-02
 
 ### Added
