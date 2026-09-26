@@ -6,6 +6,14 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- `submit_feedback.py` now sends the payload to curl as UTF-8. It used text-mode
+  `subprocess`, which encodes with the locale's code page (cp1252 on most
+  Windows machines): characters such as `Ø` or `°` reached the server as invalid
+  UTF-8, and characters such as `→` or Persian text crashed the send, which was
+  then reported as an unreachable server after a 35-second hang per attempt.
+
 ## [1.2.0] - 2026-08-02
 
 ### Added

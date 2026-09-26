@@ -80,7 +80,12 @@ def main() -> int:
         curl = shutil.which("curl")
         if not curl:
             raise OSError("curl is not available")
-        body = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+        # Hand curl UTF-8 bytes ourselves. In text mode subprocess would encode
+        # with the locale's code page (cp1252 on most Windows machines), which
+        # sends invalid JSON bytes or fails outright on characters such as "→".
+        body = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode(
+            "utf-8"
+        )
         endpoint = f"{host}/api/feedback"
 
         for attempt in range(args.attempts):
@@ -104,11 +109,12 @@ def main() -> int:
                     ],
                     input=body,
                     capture_output=True,
-                    text=True,
                     timeout=35,
                     check=False,
                 )
-                response_body, status = parse_response(completed.stdout)
+                response_body, status = parse_response(
+                    completed.stdout.decode("utf-8", errors="replace")
+                )
             except (OSError, subprocess.SubprocessError):
                 status = "000"
                 response_body = ""
