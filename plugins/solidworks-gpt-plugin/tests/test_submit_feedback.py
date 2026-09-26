@@ -16,7 +16,7 @@ SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "submit_feedback.py"
 
 # Typical CAD notes: a diameter sign, degrees, an arrow, a comparison and Persian.
 ISSUES = "Hole Ø10 at 45° → fillet ≥ 2 mm; سوراخ"
-FEEDBACK_ID = "fb-ü-1"
+FEEDBACK_ID = "fb-1"
 
 
 class _RecordingHandler(BaseHTTPRequestHandler):
