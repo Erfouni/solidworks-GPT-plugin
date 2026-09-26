@@ -121,7 +121,17 @@ def main() -> int:
 
             if status.startswith("2"):
                 feedback_id = feedback_id_from(response_body)
-                mark_feedback_submitted(args.state, feedback_id)
+                try:
+                    mark_feedback_submitted(args.state, feedback_id)
+                except (OSError, ValueError) as exc:
+                    # The server has the feedback by now. A state file that is
+                    # missing or has no sessionId cannot turn that into "not
+                    # submitted"; it only means the ID was not recorded.
+                    if args.verbose:
+                        print(
+                            f"Feedback ID not recorded in {args.state}: {exc}",
+                            file=sys.stderr,
+                        )
                 print(f"Feedback submitted. ID: {feedback_id}")
                 return 0
             if status.startswith("4"):

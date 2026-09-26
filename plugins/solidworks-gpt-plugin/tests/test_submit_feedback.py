@@ -36,8 +36,9 @@ class _RecordingHandler(BaseHTTPRequestHandler):
         pass
 
 
-@unittest.skipUnless(shutil.which("curl"), "curl is required")
-class SubmitFeedbackEncodingTests(unittest.TestCase):
+class _LocalServerTests(unittest.TestCase):
+    """A recording KB server on a free loopback port, one per test."""
+
     def setUp(self) -> None:
         _RecordingHandler.received = []
         self.server = HTTPServer(("127.0.0.1", 0), _RecordingHandler)
@@ -46,7 +47,11 @@ class SubmitFeedbackEncodingTests(unittest.TestCase):
         self.addCleanup(self.thread.join)
         self.addCleanup(self.server.server_close)
         self.addCleanup(self.server.shutdown)
+        self.host = f"http://127.0.0.1:{self.server.server_address[1]}"
 
+
+@unittest.skipUnless(shutil.which("curl"), "curl is required")
+class SubmitFeedbackEncodingTests(_LocalServerTests):
     def test_non_ascii_payload_is_sent_as_utf8_under_a_legacy_locale(self) -> None:
         payload = {"issues": ISSUES, "sessionId": "session-1"}
         with tempfile.TemporaryDirectory() as directory:
@@ -92,6 +97,68 @@ class SubmitFeedbackEncodingTests(unittest.TestCase):
             self.assertEqual(sent["issues"], ISSUES)
             stored = json.loads(state_path.read_text(encoding="utf-8"))
             self.assertEqual(stored["lastFeedbackId"], FEEDBACK_ID)
+
+
+@unittest.skipUnless(shutil.which("curl"), "curl is required")
+class SubmitFeedbackStateTests(_LocalServerTests):
+    """Once the server has accepted the feedback, a session state that cannot
+    record the ID must not turn the result into "not submitted"."""
+
+    def submit(self, directory: str, state: dict | None) -> subprocess.CompletedProcess[bytes]:
+        payload_path = Path(directory) / "payload.json"
+        payload_path.write_text(
+            json.dumps({"issues": "ok", "sessionId": "session-1"}), encoding="utf-8"
+        )
+        state_path = Path(directory) / "state.json"
+        if state is not None:
+            state_path.write_text(json.dumps(state), encoding="utf-8")
+        env = dict(os.environ)
+        env["NO_PROXY"] = env["no_proxy"] = "127.0.0.1,localhost"
+        return subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT),
+                str(payload_path),
+                "--host",
+                self.host,
+                "--state",
+                str(state_path),
+                "--attempts",
+                "1",
+                "--verbose",
+            ],
+            env=env,
+            capture_output=True,
+            timeout=60,
+            check=False,
+        )
+
+    def assert_submitted(self, completed: subprocess.CompletedProcess[bytes]) -> None:
+        self.assertEqual(
+            completed.returncode,
+            0,
+            completed.stderr.decode("utf-8", errors="replace"),
+        )
+        self.assertIn(
+            f"Feedback submitted. ID: {FEEDBACK_ID}",
+            completed.stdout.decode("utf-8", errors="replace"),
+        )
+        self.assertEqual(len(_RecordingHandler.received), 1)
+
+    def test_missing_state_file_is_not_reported_as_a_failed_submission(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            self.assert_submitted(self.submit(directory, state=None))
+            self.assertFalse((Path(directory) / "state.json").exists())
+
+    def test_state_without_session_id_is_not_reported_as_a_failed_submission(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            completed = self.submit(directory, state={"partId": None})
+            self.assert_submitted(completed)
+            self.assertIn(
+                "not recorded", completed.stderr.decode("utf-8", errors="replace")
+            )
+            stored = json.loads((Path(directory) / "state.json").read_text(encoding="utf-8"))
+            self.assertNotIn("lastFeedbackId", stored)
 
 
 if __name__ == "__main__":
