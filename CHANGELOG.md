@@ -13,6 +13,10 @@ All notable changes to this project are documented here. The format follows
   Windows machines): characters such as `Ø` or `°` reached the server as invalid
   UTF-8, and characters such as `→` or Persian text crashed the send, which was
   then reported as an unreachable server after a 35-second hang per attempt.
+- `validate_feedback.py` and `submit_feedback.py` now read a payload given as
+  `-` (stdin) as UTF-8. Text-mode stdin decoded it with the locale's code page,
+  so `→` became `â†’` and Persian text was garbled before validation, and the
+  garbled text was what got submitted. Reading from a file was not affected.
 
 ## [1.2.0] - 2026-08-02
 
