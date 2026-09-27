@@ -91,7 +91,9 @@ def normalize_payload(raw_payload: Any) -> dict[str, Any]:
 
 def read_payload(path: str) -> Any:
     if path == "-":
-        return json.load(sys.stdin)
+        # Read bytes: text-mode stdin decodes with the locale code page (cp1252
+        # on Windows), which garbles UTF-8 input. json.loads detects UTF-8/16/32.
+        return json.loads(sys.stdin.buffer.read())
     with Path(path).open("r", encoding="utf-8") as handle:
         return json.load(handle)
 
@@ -118,7 +120,7 @@ def main() -> int:
             )
         print("Feedback payload is valid.")
         return 0
-    except (OSError, json.JSONDecodeError, ValidationError) as exc:
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValidationError) as exc:
         print(f"Invalid feedback payload: {exc}", file=sys.stderr)
         return 1
 

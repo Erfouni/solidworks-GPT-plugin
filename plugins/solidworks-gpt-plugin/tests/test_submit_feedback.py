@@ -99,6 +99,47 @@ class SubmitFeedbackEncodingTests(_LocalServerTests):
             self.assertEqual(stored["lastFeedbackId"], FEEDBACK_ID)
 
 
+    def test_payload_from_stdin_is_read_as_utf8_under_a_legacy_locale(self) -> None:
+        payload = {"issues": ISSUES, "sessionId": "session-1"}
+        with tempfile.TemporaryDirectory() as directory:
+            state_path = Path(directory) / "state.json"
+            state_path.write_text(json.dumps({"sessionId": "session-1"}), encoding="utf-8")
+            # PYTHONIOENCODING makes text-mode stdin non-UTF-8 on every OS,
+            # including a CI runner whose locale is UTF-8.
+            env = dict(os.environ, LC_ALL="C", PYTHONCOERCECLOCALE="0")
+            env["PYTHONIOENCODING"] = "latin-1"
+            env.pop("PYTHONUTF8", None)
+            env["NO_PROXY"] = env["no_proxy"] = "127.0.0.1,localhost"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8=0",
+                    str(SCRIPT),
+                    "-",
+                    "--host",
+                    self.host,
+                    "--state",
+                    str(state_path),
+                    "--attempts",
+                    "1",
+                ],
+                input=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+                env=env,
+                capture_output=True,
+                timeout=60,
+                check=False,
+            )
+
+            self.assertEqual(
+                completed.returncode,
+                0,
+                completed.stderr.decode("utf-8", errors="replace"),
+            )
+            self.assertEqual(len(_RecordingHandler.received), 1)
+            sent = json.loads(_RecordingHandler.received[0].decode("utf-8"))
+            self.assertEqual(sent["issues"], ISSUES)
+
 @unittest.skipUnless(shutil.which("curl"), "curl is required")
 class SubmitFeedbackStateTests(_LocalServerTests):
     """Once the server has accepted the feedback, a session state that cannot
