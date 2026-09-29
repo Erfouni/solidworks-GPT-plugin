@@ -60,5 +60,9 @@ web-fetch tools for KB runtime calls. Quote every URL. Runtime endpoints are
 public and use camelCase JSON. KB failure is never a reason to abandon the CAD
 task; record it and continue.
 
+On Windows, run `curl.exe` instead of `curl`: in Windows PowerShell 5.1
+`curl` is an alias for `Invoke-WebRequest`, which rejects curl options such
+as `-sS`. `curl.exe` is the real curl in every Windows shell.
+
 Do not submit session feedback without explicit consent unless
 `~/.sw-feedback-pref` contains exactly `always`.

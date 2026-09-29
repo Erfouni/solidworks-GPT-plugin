@@ -4,6 +4,10 @@ The skills use the public camelCase API at `SW_KB_HOST`, defaulting to
 `https://sw-plugin.ideep.org`. All calls must use shell `curl` with the complete
 URL quoted. Runtime requests do not use an authorization header.
 
+On Windows, run `curl.exe` instead of `curl`: in Windows PowerShell 5.1
+`curl` is an alias for `Invoke-WebRequest`, which rejects curl options such
+as `-sS`. `curl.exe` is the real curl in every Windows shell.
+
 ## Contents
 
 1. [Health and catalog](#health-and-catalog)
