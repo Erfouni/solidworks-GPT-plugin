@@ -17,6 +17,10 @@ All notable changes to this project are documented here. The format follows
   `-` (stdin) as UTF-8. Text-mode stdin decoded it with the locale's code page,
   so `→` became `â†’` and Persian text was garbled before validation, and the
   garbled text was what got submitted. Reading from a file was not affected.
+- The skills, `AGENTS.md` and the runtime API notes now tell the agent to run
+  `curl.exe` on Windows. In Windows PowerShell 5.1 `curl` is an alias for
+  `Invoke-WebRequest`, so every KB command as written (`curl -sS "..."`)
+  failed with "A parameter cannot be found that matches parameter name 'sS'".
 
 ## [1.2.0] - 2026-08-02
 
