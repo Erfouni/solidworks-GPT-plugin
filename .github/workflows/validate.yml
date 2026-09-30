@@ -15,11 +15,16 @@ concurrency:
 
 jobs:
   checks:
-    name: Python ${{ matrix.python-version }}
-    runs-on: ubuntu-latest
+    name: ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        # SolidWorks only runs on Windows, and some tests (PowerShell's curl
+        # alias, the cp1252 feedback path) only run there.
+        os:
+          - ubuntu-latest
+          - windows-latest
         python-version:
           - "3.9"
           - "3.13"
